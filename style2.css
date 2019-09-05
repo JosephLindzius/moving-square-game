@@ -6,6 +6,60 @@
     overflow-y: hidden;
 }
 
+#hitPointsWrapper {
+    margin: auto auto;
+    text-align: center;
+}
+
+#hitPoints {
+    padding-top: 40px;
+    height: 100px;
+    width: 200px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+#hitPointsWrapper {
+    margin: auto auto;
+    text-align: center;
+}
+
+#hitPoints {
+    padding-top: 40px;
+    height: 100px;
+    width: 200px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+
+
+#gameBoardWrapper {
+    display: flex;
+    justify-content: center;
+    background-color: lightgrey;
+    height: 90vh;
+}
+
+#gameBoard {
+    position: relative;
+    margin: auto;
+    height: 600px;
+    width: 600px;
+    background-color: yellow;
+    overflow: hidden;
+}
+
+.textHeader {
+    margin: auto;
+    text-align: center;
+    background-color: yellow;
+}
+
 #player {
     position: absolute;
     height: 30px;
@@ -27,26 +81,3 @@
 /* #enemy2 {
     transform: scale(2);
 } */
-
-#gameBoard {
-    position: relative;
-    margin: auto;
-    height: 600px;
-    width: 600px;
-    background-color: yellow;
-    overflow: hidden;
-}
-
-#gameBoardWrapper {
-    display: flex;
-    padding-top: 50px;
-    background-color: lightgrey;
-    height: 100vh;
-}
-
-#hitPoints {
-    flex-grow: 1;
-    height: 40px;
-    width: 40px;
-    background-color: black;
-}

@@ -12,7 +12,9 @@ var playerdy = 5;
 var playerWidth = 30;
 var playerHeight = 30;
 var player = document.getElementById("player");
+
 var hitPoints = 10;
+var hpCounter = document.getElementById("hitPoints");
 
 
 //enemy variables
@@ -219,6 +221,7 @@ function playerCollisionGameBoard () {
 
 }
 
+
 function detectCollision () {
 
 
@@ -289,13 +292,10 @@ function playerMove(keyPressed)
 drawEnemy();
 
 function draw () {
- //  player.style.border = "solid 2px black";
-   // gameboard.style.backgroundColor = "yellow";
-
   window.addEventListener("keyup", function(){
        player.style.border = "solid 2px black";
     });
-
+    hpCounter.innerText = "hit point: " + hitPoints;
   moveEnemy0();
   moveEnemy1();
   moveEnemy2();
@@ -305,10 +305,11 @@ function draw () {
     } else  {
         player.style.border = "solid 2px blue";
         player.style.backgroundColor = "black";
-        hitPoints--;
         if (hitPoints === 0) {
             alert("you died");
             window.location.reload();
+        } else {
+            hitPoints--;
         }
 
     }
