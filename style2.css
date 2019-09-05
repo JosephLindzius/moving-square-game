@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+    overflow-y: hidden;
+}
+
+#player {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    background-color: black;
+    top: 250px;
+    left: 250px;
+}
+
+.enemy {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background-color: red;
+    margin: 5px;
+    overflow-y: paged-y-controls;
+}
+
+/* #enemy2 {
+    transform: scale(2);
+} */
+
+#gameBoard {
+    position: relative;
+    margin: auto;
+    height: 600px;
+    width: 600px;
+    background-color: yellow;
+    overflow: hidden;
+}
+
+#gameBoardWrapper {
+    display: flex;
+    padding-top: 50px;
+    background-color: lightgrey;
+    height: 100vh;
+}
+
+#hitPoints {
+    flex-grow: 1;
+    height: 40px;
+    width: 40px;
+    background-color: black;
+}
