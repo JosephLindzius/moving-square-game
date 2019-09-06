@@ -1,7 +1,8 @@
 
+
 var level = localStorage.getItem("level");
 if (level === null) {
-    level = 0;
+    level = 1;
 } else {
     level++;
 }
@@ -349,8 +350,9 @@ function draw () {
     }
 
     if (playerPositionX > positionExitX && playerPositionX < positionExitX + exitWidth && playerPositionY > positionExitY && playerPositionY < positionExitY + exitHeight) {
-        alert("Next LEvel");
-        level++;
+        alert("Next Level");
+        enemy3dx += 5;
+        enemy3dy += 5;
         document.location.reload();
 
     }
@@ -380,7 +382,7 @@ function draw () {
     localStorage.setItem("level", level);
     localStorage.setItem("timer", seconds);
 
-    if (hitPoints < 0) {
+    if (hitPoints <= 0) {
         alert("You died! Begin again");
         localStorage.removeItem('timer');
         localStorage.removeItem('level');
@@ -395,9 +397,5 @@ window.onload = function()
     {  window.addEventListener("keydown", playerMove);
         setInterval(incrementSeconds, 1000);
         draw();
-        if (level === 0) {
-            //console.log
-        } else {
-            level--;
-        }
+
     };
