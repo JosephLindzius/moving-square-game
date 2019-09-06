@@ -1,9 +1,15 @@
+var level = 1;
+var levelCounter = document.getElementById('levelCounter');
+levelCounter.innerText = "Level: " + level;
+
+
 var seconds = 0;
 var el = document.getElementById('timeCounter');
 el.innerText = "Stayed alive for   0 seconds.";
 function incrementSeconds() {
     seconds += 1;
     el.innerText = "Stayed alive for   " + seconds + " seconds.";
+    levelCounter.innerText = "Level: " + level;
 }
 
 
@@ -13,8 +19,6 @@ var gameboard = document.getElementById("gameBoard");
 var gameboardWidth = 600;
 var gameboardHeight = 600;
 var templatefloortile = document.getElementById("template-floortiles");
-var templateHole = document.getElementById("template-hole");
-
 
 
  for (let j = 0; j < 21; j++) {
@@ -31,28 +35,48 @@ var templateHole = document.getElementById("template-hole");
 
     }
 }
-var holeWidth = 64;
- var holeHeight = 64;
- var hole0PositionX = Math.random() * 200;
-var hole0PositionY = Math.random() * 200;
 
+//making exit for levels
+ var templateExit = document.getElementById("template-exit");
+    var exitWidth = 40;
+    var exitHeight = 60;
+    var positionExitX = Math.floor(Math.random() * 20 + 10);
+    var positionExitY = Math.floor(Math.random() * 450);
+//Hole making
+var templateHole = document.getElementById("template-hole");
+var holeWidth = 64;
+var holeHeight = 64;
+var hole0PositionX = Math.random() * 200;
+var hole0PositionY = Math.random() * 200;
+var hole1PositionX = Math.random() * 200 + 300;
+var hole1PositionY = Math.random() * 200 + 300;
+function makeNewLevel () {
+//exit
+    gameboard.appendChild(templateExit.content.cloneNode(true));
+    document.querySelectorAll("#exit")[0].style.position = "absolute;";
+    document.querySelectorAll("#exit")[0].style.left = (positionExitX) + "px";
+    document.querySelectorAll("#exit")[0].style.top = (positionExitY) + "px";
+
+
+
+    //hole0
     gameboard.appendChild(templateHole.content.cloneNode(true));
     document.querySelectorAll(".hole")[0].style.position = "absolute;";
     document.querySelectorAll(".hole")[0].style.left = (hole0PositionX) + "px";
     document.querySelectorAll(".hole")[0].style.top = (hole0PositionY) + "px";
 
-var hole1PositionX = Math.random() * 200 + 300;
-var hole1PositionY = Math.random() * 200 + 300;
+    //hole1
+    gameboard.appendChild(templateHole.content.cloneNode(true));
+    document.querySelectorAll(".hole")[1].style.position = "absolute;";
+    document.querySelectorAll(".hole")[1].style.left = (hole1PositionX) + "px";
+    document.querySelectorAll(".hole")[1].style.top = (hole1PositionY) + "px";
 
-gameboard.appendChild(templateHole.content.cloneNode(true));
-document.querySelectorAll(".hole")[1].style.position = "absolute;";
-document.querySelectorAll(".hole")[1].style.left = (hole1PositionX) + "px";
-document.querySelectorAll(".hole")[1].style.top = (hole1PositionY) + "px";
-
+}
+makeNewLevel();
 
 // player variables
-var playerPositionX = 250;
-var playerPositionY = 250;
+var playerPositionX = 550;
+var playerPositionY = 10;
 var playerdx = 5;
 var playerdy = 5;
 var playerWidth = 30;
@@ -210,10 +234,10 @@ function moveEnemy3 () {
         enemyCordsY[3] = 0;
         enemy3dy = -enemy3dy
     } else if (enemyCordsY[3] > gameboardHeight) {
-       enemyCordsY[3] = 0;
+        enemyCordsY[3] = 0;
         enemy3dy = -enemy3dy;
     } else {
-        enemyCordsX[3] += 10//enemydx + Math.random() < 0.5 ? -1 : 1;
+        enemyCordsX[3] += 10;  //enemydx + Math.r1andom() < 0.5 ? -1 : 1;
         enemyCordsY[3] += Math.random() < 0.5 ? -1 : 1;
     }
 }
@@ -294,7 +318,7 @@ function draw () {
   moveEnemy2();
   moveEnemy3();
 
-    if (playerPositionX > hole0PositionX && playerPositionX < hole0PositionX + enemyWidth && playerPositionY > hole0PositionY && playerPositionY < hole0PositionY + enemyHeight) {
+    if (playerPositionX > hole0PositionX && playerPositionX < hole0PositionX + holeWidth && playerPositionY > hole0PositionY && playerPositionY < hole0PositionY + holeHeight) {
        alert( "you are in a hole and lose a life");
        hitPoints--;
        playerPositionX = 550;
@@ -303,7 +327,14 @@ function draw () {
        player.style.top = 10 + "px";
     }
 
-    if (playerPositionX > hole1PositionX && playerPositionX < hole1PositionX + enemyWidth && playerPositionY > hole1PositionY && playerPositionY < hole1PositionY + enemyHeight) {
+    if (playerPositionX > positionExitX && playerPositionX < positionExitX + exitWidth && playerPositionY > positionExitY && playerPositionY < positionExitY + exitHeight) {
+        level++;
+        setTimeout(makeNewLevel, 3000);
+
+
+    }
+
+    if (playerPositionX > hole1PositionX && playerPositionX < hole1PositionX + holeWidth && playerPositionY > hole1PositionY && playerPositionY < hole1PositionY + holeHeight) {
         alert( "you are in a hole and lose a life");
         hitPoints--;
         playerPositionX = 550;

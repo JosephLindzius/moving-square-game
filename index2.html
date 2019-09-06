@@ -5,8 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="style2.css"><script src="script2.js"></script>
+    <title>Little Monsters</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css"><script src="script2.js"></script>
 </head>
 <body>
 
@@ -19,6 +19,9 @@
 <template id="enemy-tpl">
     <div class="enemy"></div>
 </template>
+<template id="template-exit">
+    <img id="exit" src="assets/images/exit.png"></img>
+</template>
 <header>
     <h1 class="textHeader">Little Monsters</h1>
 </header>
@@ -30,11 +33,14 @@
         <div id="timeCounterWrapper">
             <div id="timeCounter"></div>
         </div>
+        <div id="levelCounterWrapper">
+            <div id="levelCounter"></div>
+        </div>
     </div>
     <div id="gameBoardWrapper">
-        <div id="gameBoard">
-            <div id="player"></div>
-        </div>
+            <div id="gameBoard">
+                <div id="player"></div>
+            </div>
     </div>
 </main>
 <footer>

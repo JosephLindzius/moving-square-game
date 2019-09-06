@@ -73,6 +73,7 @@ main {
 
 }
 
+
 #gameBoard {
     position: relative;
     margin: auto auto;
@@ -99,7 +100,7 @@ main {
     background-color: black;
     top: 250px;
     left: 250px;
-    z-index: 10;
+    z-index: 2;
 }
 
 .enemy {
@@ -109,7 +110,7 @@ main {
     background-color: red;
     margin: 5px;
     overflow-y: paged-y-controls;
-    z-index: 10;
+    z-index: 2;
 }
 
 #enemy3 {
