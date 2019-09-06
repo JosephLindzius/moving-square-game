@@ -351,8 +351,6 @@ function draw () {
 
     if (playerPositionX > positionExitX && playerPositionX < positionExitX + exitWidth && playerPositionY > positionExitY && playerPositionY < positionExitY + exitHeight) {
         alert("Next Level");
-        enemy3dx += 5;
-        enemy3dy += 5;
         document.location.reload();
 
     }
@@ -367,13 +365,34 @@ function draw () {
     }
 
     if (playerPositionX > enemyCordsX[3] && playerPositionX < enemyCordsX[3] + enemyWidth && playerPositionY > enemyCordsY[3] && playerPositionY < enemyCordsY[3] + enemyHeight) {
-      hitPoints--;
+        alert( "You hit the ghost meep, try again!");
+        hitPoints--;
+        playerPositionX = 550;
+        playerPositionY = 10;
+        player.style.left = 550 + "px";
+        player.style.top = 10 + "px";
+
     } else if (playerPositionX > enemyCordsX[2] && playerPositionX < enemyCordsX[2] + enemyWidth && playerPositionY > enemyCordsY[2] && playerPositionY < enemyCordsY[2] + enemyHeight) {
+        alert( "You hit a meep, try again!");
         hitPoints--;
+        playerPositionX = 550;
+        playerPositionY = 10;
+        player.style.left = 550 + "px";
+        player.style.top = 10 + "px";
     } else if (playerPositionX > enemyCordsX[1] && playerPositionX < enemyCordsX[1] + enemyWidth && playerPositionY > enemyCordsY[1] && playerPositionY < enemyCordsY[1] + enemyHeight) {
+        alert( "You hit a meep, try again!");
         hitPoints--;
+        playerPositionX = 550;
+        playerPositionY = 10;
+        player.style.left = 550 + "px";
+        player.style.top = 10 + "px";
     } else if (playerPositionX > enemyCordsX[0] && playerPositionX < enemyCordsX[0] + enemyWidth && playerPositionY > enemyCordsY[0] && playerPositionY < enemyCordsY[0] + enemyHeight) {
+        alert( "You hit a meep, try again!");
         hitPoints--;
+        playerPositionX = 550;
+        playerPositionY = 10;
+        player.style.left = 550 + "px";
+        player.style.top = 10 + "px";
     }
 
     hpCounter.innerText = "Hit Points: " + hitPoints;
