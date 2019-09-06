@@ -13,10 +13,16 @@ var gameboard = document.getElementById("gameBoard");
 var gameboardWidth = 600;
 var gameboardHeight = 600;
 var templatefloortile = document.getElementById("template-floortiles");
+var templateHole = document.getElementById("template-hole");
 
 
-for (let j = 0; j < 21; j++) {
+
+ for (let j = 0; j < 21; j++) {
     for (let i = 0; i < 23; i++) {
+
+        if (i % 23 === 0) {
+
+        }
 
         gameboard.appendChild(templatefloortile.content.cloneNode(true));
         document.querySelectorAll(".floorTile")[i].style.position = "absolute;";
@@ -25,7 +31,23 @@ for (let j = 0; j < 21; j++) {
 
     }
 }
+var holeWidth = 64;
+ var holeHeight = 64;
+ var hole0PositionX = Math.random() * 200;
+var hole0PositionY = Math.random() * 200;
 
+    gameboard.appendChild(templateHole.content.cloneNode(true));
+    document.querySelectorAll(".hole")[0].style.position = "absolute;";
+    document.querySelectorAll(".hole")[0].style.left = (hole0PositionX) + "px";
+    document.querySelectorAll(".hole")[0].style.top = (hole0PositionY) + "px";
+
+var hole1PositionX = Math.random() * 200 + 300;
+var hole1PositionY = Math.random() * 200 + 300;
+
+gameboard.appendChild(templateHole.content.cloneNode(true));
+document.querySelectorAll(".hole")[1].style.position = "absolute;";
+document.querySelectorAll(".hole")[1].style.left = (hole1PositionX) + "px";
+document.querySelectorAll(".hole")[1].style.top = (hole1PositionY) + "px";
 
 
 // player variables
@@ -49,8 +71,8 @@ var enemyPositionX = 0;
 var enemyPositionY = 0;
 var enemydx = Math.random() * 5 + Math.random() < 0.5 ? -1 : 1;
 var enemydy = Math.random() * 5 + Math.random() < 0.5 ? -1 : 1;
-var enemy3dx = Math.random() * 5 + Math.random() < 0.5 ? -1 : 1;
-var enemy3dy = Math.random() * 5 + Math.random() < 0.5 ? -1 : 1;
+var enemy3dx = Math.random() * 600 + Math.random() < 0.5 ? -1 : 1;
+var enemy3dy = Math.random() * 600 + Math.random() < 0.5 ? -1 : 1;
 ///A is messed up ////://////
 //var enemyax = Math.random() < 0.5 ? -1 : 1;
 //var enemyay= Math.random() < 0.5 ? -1 : 1;
@@ -86,7 +108,6 @@ function drawEnemy() {
 
     }
 }
-
 function moveEnemy0 () {
         if (playerPositionX > enemyCordsX[0]) {
             enemyCordsX[0] += enemydx;
@@ -178,22 +199,22 @@ function moveEnemy3 () {
     document.querySelectorAll(".enemy")[3].style.top = enemyCordsY[3] + "px";
 
     if (enemyCordsX[3] > gameboardWidth) {
-        enemyCordsX[3] = gameboardWidth - enemyWidth;
         enemyCordsX[3] = 0;
         enemyCordsY[3] = Math.random() * 600;
         enemy3dx = -enemy3dx;
     } else if (enemyCordsX[3] < 0) {
         enemyCordsX[3] = gameboardWidth;
         enemy3dx = -enemy3dx;
-    } else if (enemydy < 0) {
+    }
+    else if (enemyCordsY[3] < 0) {
         enemyCordsY[3] = 0;
         enemy3dy = -enemy3dy
-    } else if (enemydy > gameboardHeight) {
-        enemyCordsY[3] = gameboardHeight - enemyHeight;
+    } else if (enemyCordsY[3] > gameboardHeight) {
+       enemyCordsY[3] = 0;
         enemy3dy = -enemy3dy;
     } else {
-        enemyCordsX[3] += enemydx + Math.random() < 0.5 ? -1 : 1;
-        enemyCordsY[3] += enemydy + Math.random() < 0.5 ? -1 : 1;
+        enemyCordsX[3] += 10//enemydx + Math.random() < 0.5 ? -1 : 1;
+        enemyCordsY[3] += Math.random() < 0.5 ? -1 : 1;
     }
 }
 
@@ -239,6 +260,7 @@ function playerCollisionGameBoard () {
         playerPositionY = gameboardHeight - playerHeight;
     }
 
+
 }
 
 function playerMove(keyPressed)
@@ -272,7 +294,23 @@ function draw () {
   moveEnemy2();
   moveEnemy3();
 
+    if (playerPositionX > hole0PositionX && playerPositionX < hole0PositionX + enemyWidth && playerPositionY > hole0PositionY && playerPositionY < hole0PositionY + enemyHeight) {
+       alert( "you are in a hole and lose a life");
+       hitPoints--;
+       playerPositionX = 550;
+       playerPositionY = 10;
+       player.style.left = 550 + "px";
+       player.style.top = 10 + "px";
+    }
 
+    if (playerPositionX > hole1PositionX && playerPositionX < hole1PositionX + enemyWidth && playerPositionY > hole1PositionY && playerPositionY < hole1PositionY + enemyHeight) {
+        alert( "you are in a hole and lose a life");
+        hitPoints--;
+        playerPositionX = 550;
+        playerPositionY = 10;
+        player.style.left = 550 + "px";
+        player.style.top = 10 + "px";
+    }
 
     if (playerPositionX > enemyCordsX[3] && playerPositionX < enemyCordsX[3] + enemyWidth && playerPositionY > enemyCordsY[3] && playerPositionY < enemyCordsY[3] + enemyHeight) {
       hitPoints--;
@@ -285,19 +323,7 @@ function draw () {
     }
 
     hpCounter.innerText = "Hit Points: " + hitPoints;
-    /* if((enemyCordsX[0] >= (playerPositionX + playerWidth)  || enemyCordsY[0] >= (playerPositionY + playerHeight) || ((enemyCordsX[0] + enemyWidth) <= playerPositionX) || (enemyCordsY[0] + enemyHeight) <= playerPositionY) || (enemyCordsX[1] >= (playerPositionX + playerWidth)  || enemyCordsY[1] >= (playerPositionY + playerHeight) || ((enemyCordsX[1] + enemyWidth) <= playerPositionX) || (enemyCordsY[1] + enemyHeight) <= playerPositionY) || (enemyCordsX[2] >= (playerPositionX + playerWidth)  || enemyCordsY[2] >= (playerPositionY + playerHeight) || ((enemyCordsX[2] + enemyWidth) <= playerPositionX) || (enemyCordsY[2] + enemyHeight) <= playerPositionY)) {
-        player.style.backgroundColor = "blue";
-    } else  {
-        player.style.border = "solid 2px blue";
-        player.style.backgroundColor = "black";
-        if (hitPoints <= 1) {
-           // alert("you died");
-         //   window.location.reload();
-        } else {
-            hitPoints--;
-            hpCounter.innerText = "hit point: " + hitPoints;
-        }
-    }*/
+
     playerCollisionGameBoard();
     requestAnimationFrame(draw);
 }
