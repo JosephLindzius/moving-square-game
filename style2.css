@@ -12,6 +12,7 @@ main {
     justify-content: space-around;
     height: 90vh;
 }
+
  #uiFunctions {
      display: flex;
      flex-direction: column;
@@ -74,7 +75,7 @@ main {
 
 #gameBoard {
     position: relative;
-    margin: auto;
+    margin: auto auto;
     height: 600px;
     width: 600px;
     background-color: yellow;
@@ -112,3 +113,9 @@ main {
 /* #enemy2 {
     transform: scale(2);
 } */
+.floorTile {
+
+    width: 40px;
+    height: 40px;
+    margin: -8px;
+}

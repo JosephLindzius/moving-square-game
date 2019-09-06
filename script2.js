@@ -12,6 +12,21 @@ function incrementSeconds() {
 var gameboard = document.getElementById("gameBoard");
 var gameboardWidth = 600;
 var gameboardHeight = 600;
+var templatefloortile = document.getElementById("template-floortiles");
+
+
+for (let j = 0; j < 21; j++) {
+    for (let i = 0; i < 23; i++) {
+
+        gameboard.appendChild(templatefloortile.content.cloneNode(true));
+        document.querySelectorAll(".floorTile")[i].style.position = "absolute;";
+        document.querySelectorAll(".floorTile")[i].style.left = i + "px";
+        document.querySelectorAll(".floorTile")[j].style.top =  j + "px";
+
+    }
+}
+
+
 
 // player variables
 var playerPositionX = 250;
@@ -21,7 +36,7 @@ var playerdy = 5;
 var playerWidth = 30;
 var playerHeight = 30;
 var player = document.getElementById("player");
-var hitPoints = 10;
+var hitPoints = 3;
 var hpCounter = document.getElementById("hitPoints");
 hpCounter.innerText = "Hit Points: " + hitPoints;
 
