@@ -8,7 +8,7 @@
 
 ## Learning objectives
 - move DOM elements on the page
-- react to keypresses
+- react to keypresses``
 - collision detection
 
 ## The Mission
