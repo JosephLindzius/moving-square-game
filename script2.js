@@ -1,16 +1,30 @@
-var level = 1;
+
+var level = localStorage.getItem("level");
+if (level === null) {
+    level = 0;
+} else {
+    level++;
+}
+localStorage.setItem("counter", parseInt(level));
 var levelCounter = document.getElementById('levelCounter');
 levelCounter.innerText = "Level: " + level;
 
 
-var seconds = 0;
-var el = document.getElementById('timeCounter');
-el.innerText = "Stayed alive for   0 seconds.";
+var seconds = localStorage.getItem('timer');
+if (seconds === null) {
+    seconds = 0;
+} else {
+    seconds++;
+}
+var timer = document.getElementById('timeCounter');
+timer.innerText = "Stayed alive for "+seconds +" seconds.";
 function incrementSeconds() {
     seconds += 1;
-    el.innerText = "Stayed alive for   " + seconds + " seconds.";
+    timer.innerText = "Stayed alive for   " + seconds + " seconds.";
     levelCounter.innerText = "Level: " + level;
 }
+
+localStorage.setItem("counter", parseInt(seconds));
 
 
 
@@ -82,7 +96,14 @@ var playerdy = 5;
 var playerWidth = 30;
 var playerHeight = 30;
 var player = document.getElementById("player");
-var hitPoints = 3;
+var hitPoints = localStorage.getItem("hitPoints");
+
+if (hitPoints === null) {
+    hitPoints = 3;
+} else {
+    hitPoints++;
+}
+localStorage.setItem("hitPoints", parseInt(hitPoints))
 var hpCounter = document.getElementById("hitPoints");
 hpCounter.innerText = "Hit Points: " + hitPoints;
 
@@ -328,9 +349,9 @@ function draw () {
     }
 
     if (playerPositionX > positionExitX && playerPositionX < positionExitX + exitWidth && playerPositionY > positionExitY && playerPositionY < positionExitY + exitHeight) {
+        alert("Next LEvel");
         level++;
-        setTimeout(makeNewLevel, 3000);
-
+        document.location.reload();
 
     }
 
@@ -354,7 +375,18 @@ function draw () {
     }
 
     hpCounter.innerText = "Hit Points: " + hitPoints;
+    levelCounter.innerText = "Level: " + level;
+    localStorage.setItem("hitPoints", hitPoints);
+    localStorage.setItem("level", level);
+    localStorage.setItem("timer", seconds);
 
+    if (hitPoints < 0) {
+        alert("You died! Begin again");
+        localStorage.removeItem('timer');
+        localStorage.removeItem('level');
+        localStorage.removeItem('hitPoints');
+        window.location.reload();
+    }
     playerCollisionGameBoard();
     requestAnimationFrame(draw);
 }
@@ -363,4 +395,9 @@ window.onload = function()
     {  window.addEventListener("keydown", playerMove);
         setInterval(incrementSeconds, 1000);
         draw();
+        if (level === 0) {
+            //console.log
+        } else {
+            level--;
+        }
     };
